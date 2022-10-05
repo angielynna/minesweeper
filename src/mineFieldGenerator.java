@@ -5,26 +5,42 @@ import java.util.Random;
 public class mineFieldGenerator {
     public static void main(final String[] theArgs) throws
             FileNotFoundException {
+        PrintStream output = new PrintStream("generated.txt");
         Random rd = new Random();
-        int rows = rd.nextInt(100) + 1;
-        int columns = rd.nextInt(100) + 1;
+        StringBuilder sb = new StringBuilder();
+        //randomly generate number of mazes between 1 and 10:
+        int numMazes = rd.nextInt(11);
+        System.out.println(numMazes);
+        while(numMazes > 0) {
+            int rows = rd.nextInt(100) + 1;
+            int columns = rd.nextInt(100) + 1;
 
-        double bombSpawnRate = rd.nextDouble();
-        int numBombs = 1;
-        if ((int) (bombSpawnRate * (rows * columns)) > 1) {
-            numBombs = (int) (bombSpawnRate * (rows * columns));
+            double bombSpawnRate = rd.nextDouble();
+            int numBombs = 1;
+            if ((int) (bombSpawnRate * (rows * columns)) > 1) {
+                numBombs = (int) (bombSpawnRate * (rows * columns));
+            }
+            char[][] mineField = generateLocations(rows, columns,
+                                                        numBombs);
+            sb.append(rows + " " + columns + "\n");
+            for(int i = 0; i < mineField.length; i++) {
+                for(int j = 0; j < mineField[0].length; j++) {
+                    sb.append(mineField[i][j]);
+                }
+                sb.append("\n");
+            }
+            output.append(sb.toString());
+            numMazes--;
         }
-        generateLocations(rows, columns, numBombs);
+        output.append("0 0");
     }
 
-    public static void generateLocations(final int theRows,
+    public static char[][] generateLocations(final int theRows,
                                          final int theCols,
                                          final int theBombs) throws
                                         FileNotFoundException{
         Random rand = new Random();
         char[][] field = new char[theRows][theCols];
-        StringBuilder sb = new StringBuilder();
-        sb.append(theRows + " " + theCols + "\n");
 
         //generate bomb locations
         int[][] bombs = genBombLocation(theBombs, theRows, theCols);
@@ -45,7 +61,7 @@ public class mineFieldGenerator {
             }
         }
 
-        output(field, sb);
+       return field;
     }
 
     private static int[][] genBombLocation(final int theBombs,
