@@ -39,9 +39,7 @@ public class mineFieldGenerator {
 
     public static char[][] generateLocations(final int theRows,
                                          final int theCols,
-                                         final int theBombs) throws
-                                        FileNotFoundException{
-        Random rand = new Random();
+                                         final int theBombs) {
         char[][] field = new char[theRows][theCols];
 
         //generate bomb locations
