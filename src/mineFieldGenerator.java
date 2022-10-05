@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.*;
+import java.util.Random;
 
 public class mineFieldGenerator {
     public static void main(final String[] theArgs) throws
