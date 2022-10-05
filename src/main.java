@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class main {
-    public static void main(String[] theArgs) throws
+    public static void main(final String[] theArgs) throws
             FileNotFoundException {
 
         File output = new File("output.txt");

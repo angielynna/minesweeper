@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class mineFieldGenerator {
-    public static void main(String[] theArgs) throws
+    public static void main(final String[] theArgs) throws
             FileNotFoundException {
         Random rd = new Random();
         int rows = rd.nextInt(100) + 1;
@@ -18,8 +18,9 @@ public class mineFieldGenerator {
         generateLocations(rows, columns, numBombs);
     }
 
-    public static void generateLocations(int theRows, int theCols,
-                                          int theBombs) throws
+    public static void generateLocations(final int theRows,
+                                         final int theCols,
+                                         final int theBombs) throws
                                         FileNotFoundException{
         Random rand = new Random();
         char[][] field = new char[theRows][theCols];
@@ -48,8 +49,9 @@ public class mineFieldGenerator {
         output(field, sb);
     }
 
-    private static int[][] genBombLocation(int theBombs, int theRows,
-                                           int theColumns) {
+    private static int[][] genBombLocation(final int theBombs,
+                                           final int theRows,
+                                           final int theColumns) {
         int[][] locations = new int[theBombs][2];
         Random rd = new Random();
         for(int i = 0; i < theBombs; i++) {
@@ -63,9 +65,9 @@ public class mineFieldGenerator {
         return locations;
     }
 
-    private static void output(char[][] theField,
-                               StringBuilder theString)
-            throws FileNotFoundException {
+    private static void output(final char[][] theField,
+                               final StringBuilder theString)
+                                throws FileNotFoundException {
         try {
             PrintStream output = new PrintStream("generated.txt");
             for(int i = 0; i < theField.length; i++) {
