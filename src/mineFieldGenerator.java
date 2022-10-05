@@ -8,9 +8,10 @@ public class mineFieldGenerator {
         PrintStream output = new PrintStream("generated.txt");
         Random rd = new Random();
         StringBuilder sb = new StringBuilder();
+
         //randomly generate number of mazes between 1 and 10:
         int numMazes = rd.nextInt(11);
-        System.out.println(numMazes);
+
         while(numMazes > 0) {
             int rows = rd.nextInt(100) + 1;
             int columns = rd.nextInt(100) + 1;
@@ -20,6 +21,7 @@ public class mineFieldGenerator {
             if ((int) (bombSpawnRate * (rows * columns)) > 1) {
                 numBombs = (int) (bombSpawnRate * (rows * columns));
             }
+
             char[][] mineField = generateLocations(rows, columns,
                                                         numBombs);
             sb.append(rows + " " + columns + "\n");
@@ -79,5 +81,5 @@ public class mineFieldGenerator {
         }
         return locations;
     }
-    
+
 }
