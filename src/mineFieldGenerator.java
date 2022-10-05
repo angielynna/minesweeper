@@ -79,21 +79,5 @@ public class mineFieldGenerator {
         }
         return locations;
     }
-
-    private static void output(final char[][] theField,
-                               final StringBuilder theString)
-                                throws FileNotFoundException {
-        try {
-            PrintStream output = new PrintStream("generated.txt");
-            for(int i = 0; i < theField.length; i++) {
-                for(int j = 0; j < theField[0].length; j++) {
-                    theString.append(theField[i][j]);
-                }
-                theString.append("\n");
-            }
-            output.append(theString.toString());
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("Cannot find file " + e);
-        }
-    }
+    
 }
