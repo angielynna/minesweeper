@@ -1,27 +1,26 @@
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 
 public class mineFieldGenerator {
     public static void main(String[] theArgs) throws
             FileNotFoundException {
-        PrintStream ps = new PrintStream("generated.txt");
-
         Random rd = new Random();
-        int rows = rd.nextInt(5) + 1;
-        int columns = rd.nextInt(5) + 1;
+        int rows = rd.nextInt(100) + 1;
+        int columns = rd.nextInt(100) + 1;
 
         double bombSpawnRate = rd.nextDouble();
         int numBombs = 1;
-        if ((int) (bombSpawnRate * (rows * columns)) >= 1) {
+        if ((int) (bombSpawnRate * (rows * columns)) > 1) {
             numBombs = (int) (bombSpawnRate * (rows * columns));
         }
-        generateLocations(rows, columns, numBombs, ps);
+        generateLocations(rows, columns, numBombs);
     }
 
     public static void generateLocations(int theRows, int theCols,
-                                          int theBombs,
-                                          PrintStream theOutput) {
+                                          int theBombs) throws
+                                        FileNotFoundException{
         Random rand = new Random();
         StringBuilder field = new StringBuilder();
         int bombRow = rand.nextInt(theRows + 1) - 1;
@@ -41,6 +40,16 @@ public class mineFieldGenerator {
             }
             theBombs--;
         }
-        System.out.println(field);
+        output(field);
+    }
+
+    private static void output(StringBuilder theField)
+            throws FileNotFoundException {
+        try {
+            PrintStream output = new PrintStream("generated.txt");
+            output.append(theField.toString());
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Cannot find file " + e);
+        }
     }
 }
