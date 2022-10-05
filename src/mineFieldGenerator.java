@@ -15,7 +15,6 @@ public class mineFieldGenerator {
         if ((int) (bombSpawnRate * (rows * columns)) > 1) {
             numBombs = (int) (bombSpawnRate * (rows * columns));
         }
-        System.out.println(numBombs);
         generateLocations(rows, columns, numBombs);
     }
 
