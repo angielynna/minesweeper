@@ -52,7 +52,7 @@ public class mineFieldGenerator {
             }
         }
 
-        //filling the rest of the field:
+        //filling the rest:
         for(int i = 0; i < theRows; i++){
             for (int j = 0; j < theCols; j++) {
                 if(field[i][j] != '*') {
