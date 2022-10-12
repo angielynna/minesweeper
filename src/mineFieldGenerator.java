@@ -1,83 +1,155 @@
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.Random;
+import java.util.Scanner;
 
-public class mineFieldGenerator {
-    public static void main(final String[] theArgs) throws
-            FileNotFoundException {
-        PrintStream output = new PrintStream("generated.txt");
-        Random rd = new Random();
-        StringBuilder sb = new StringBuilder();
+/**
+ * Displays minesweeper minefield with all adjacency values and bombs.
+ *
+ * @author Angelynna Pyeatt
+ * @version October 9, 2022
+ */
+class MinesweeperAngelynnaPyeatt {
+    public static void main(final String[] theArgs)
+            throws FileNotFoundException {
+        final Scanner sc = new Scanner(System.in);
+        int numFields = 0;
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
 
-        //randomly generate number of mazes between 1 and 10:
-        int numMazes = rd.nextInt(11);
-
-        while(numMazes > 0) {
-            int rows = rd.nextInt(100) + 1;
-            int columns = rd.nextInt(100) + 1;
-
-            double bombSpawnRate = rd.nextDouble();
-            int numBombs = 1;
-            if ((int) (bombSpawnRate * (rows * columns)) > 1) {
-                numBombs = (int) (bombSpawnRate * (rows * columns));
-            }
-
-            char[][] mineField = generateLocations(rows, columns,
-                                                        numBombs);
-            sb.append(rows + " " + columns + "\n");
-            for(int i = 0; i < mineField.length; i++) {
-                for(int j = 0; j < mineField[0].length; j++) {
-                    sb.append(mineField[i][j]);
-                }
-                sb.append("\n");
-            }
-            output.append(sb.toString());
-            numMazes--;
-        }
-        output.append("0 0");
-    }
-
-    public static char[][] generateLocations(final int theRows,
-                                         final int theCols,
-                                         final int theBombs) {
-        char[][] field = new char[theRows][theCols];
-
-        //generate bomb locations
-        int[][] bombs = genBombLocation(theBombs, theRows, theCols);
-
-        //filling field with bombs
-        for(int i = 0; i < bombs.length; i++) {
-            for(int j = 0; j < 2; j++) {
-                field[bombs[i][0]][bombs[i][1]] = '*';
-            }
-        }
-
-        //filling the rest:
-        for(int i = 0; i < theRows; i++){
-            for (int j = 0; j < theCols; j++) {
-                if(field[i][j] != '*') {
-                    field[i][j] = '.';
+        while (rows != 0 || cols != 0) {
+            numFields++;
+            //fill minefield:
+            final char[][] mineField = new char[rows][cols];
+            for (int i = 0; i < rows; i++) {
+                final char[] line = sc.next().toCharArray();
+                for (int j = 0; j < cols; j++) {
+                    if (j > 0 && i > 0) {
+                        mineField[i][j] = line[j];
+                    }
                 }
             }
+            final char[][] generatedNumField = generateNums(mineField);
+
+            //display correct output to System.out
+            final PrintStream console = new PrintStream(System.out);
+            System.setOut(console);
+            console.println("Field #" + numFields + ":");
+            for (int i = 0; i < generatedNumField.length; i++) {
+                for (int j = 0; j < generatedNumField[0].length; j++) {
+                    console.print(generatedNumField[i][j]);
+                }
+                console.println();
+            }
+
+            rows = sc.nextInt();
+            cols = sc.nextInt();
         }
 
-       return field;
     }
 
-    private static int[][] genBombLocation(final int theBombs,
-                                           final int theRows,
-                                           final int theColumns) {
-        int[][] locations = new int[theBombs][2];
-        Random rd = new Random();
-        for(int i = 0; i < theBombs; i++) {
-            int bombRow = rd.nextInt(theRows);
-            for(int j = 0; j < 1; j++) {
-                int bombCol = rd.nextInt(theColumns);
-                locations[i][j] = bombRow;
-                locations[i][j + 1] = bombCol;
+    /**
+     * This method fills a character array with the adjacency values for the
+     * minefield.
+     *
+     * @param theMineField
+     * @return numFields
+     */
+    private static char[][] generateNums(final char[][] theMineField) {
+        final char[][] numFields = new
+                char[theMineField.length][theMineField[0].length];
+        for (int i = 0; i < theMineField.length; i++) {
+            for (int j = 0; j < theMineField[0].length; j++) {
+                if (theMineField[i][j] == '*') {     //bomb
+                    numFields[i][j] = '*';
+                } else { //safe space
+                    numFields[i][j] = getAdjacencyValue(theMineField, i, j);
+                }
             }
         }
-        return locations;
+        return numFields;
     }
 
+    /**
+     * Method calculates the adjacency values for a given position in
+     * the minefield.
+     *
+     * @param theMineField
+     * @param theRow
+     * @param theCol
+     * @return (char) (value + '0')
+     */
+    private static char getAdjacencyValue(final char[][] theMineField,
+                                          final int theRow,
+                                          final int theCol) {
+        int value = 0;      //adjacency
+
+        //Process of verification:
+        //1. If the position to be checked is within the range of the minefield
+        //2. If positions directly adjacent are a bomb
+
+        //check row above:
+        if (inRange(theRow - 1, theCol - 1, theMineField)) {
+            if (theMineField[theRow - 1][theCol - 1] == '*') {
+                value++;
+            }
+        }
+        if (inRange(theRow - 1, theCol, theMineField)) {
+            if (theMineField[theRow - 1][theCol] == '*') {
+                value++;
+            }
+        }
+        if (inRange(theRow - 1, theCol + 1, theMineField)) {
+            if (theMineField[theRow - 1][theCol + 1] == '*') {
+                value++;
+            }
+        }
+
+        //current row:
+        if (inRange(theRow, theCol - 1, theMineField)) {
+            if (theMineField[theRow][theCol - 1] == '*') {
+                value++;
+            }
+        }
+        if (inRange(theRow, theCol + 1, theMineField)) {
+            if (theMineField[theRow][theCol + 1] == '*') {
+                value++;
+            }
+        }
+
+        //row below:
+        if (inRange(theRow + 1, theCol - 1, theMineField)) {
+            if (theMineField[theRow + 1][theCol - 1] == '*') {
+                value++;
+            }
+        }
+        if (inRange(theRow + 1, theCol, theMineField)) {
+            if (theMineField[theRow + 1][theCol] == '*') {
+                value++;
+            }
+        }
+        if (inRange(theRow + 1, theCol + 1, theMineField)) {
+            if (theMineField[theRow + 1][theCol + 1] == '*') {
+                value++;
+            }
+        }
+        return (char) (value + '0');
+    }
+
+    /**
+     * Determines whether the row and column position set in the parameter
+     * the minefield are legal parameters.
+     *
+     * @param theRow
+     * @param theCol
+     * @param theMaze
+     * @return boolean
+     */
+    private static boolean inRange(final int theRow, final int theCol,
+                                   final char[][] theMaze) {
+        if (theRow < theMaze.length && theRow >= 0
+                && theCol < theMaze[0].length && theCol >= 0) {
+            return true;
+        }
+        return false;
+    }
 }

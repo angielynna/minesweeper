@@ -22,7 +22,7 @@ public class main {
      * @param theArgs
      * @throws Exception
      */
-    public static void main(final String[] theArgs) throws FileNotFoundException {
+    public static void Main(final String[] theArgs) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int numFields = 0;
         if(theArgs.length == 1) {   //reads from theArgs
@@ -34,7 +34,6 @@ public class main {
 
                 while (rows != 0 || cols != 0) {
                     numFields++;
-                    System.out.println("Field #" + numFields + ":");
                     //fill minefield:
                     char[][] mineField = new char[rows + 1][cols + 1];
                     for (int i = 0; i < rows; i++) {
@@ -48,6 +47,7 @@ public class main {
                     char[][] generatedNumField = generateNums(mineField);
 
                     //display correct output
+                    System.out.println("Field #" + numFields + ":");
                     for(int i = 0; i < generatedNumField.length; i++) {
                         for (int j = 0; j < generatedNumField[0].length; j++) {
                             System.out.print(generatedNumField[i][j]);
