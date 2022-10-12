@@ -9,8 +9,7 @@ import java.util.Scanner;
  * @version October 9, 2022
  */
 class main {
-    public static void main(final String[] theArgs)
-            throws FileNotFoundException {
+    public static void main(final String[] theArgs) {
         final Scanner sc = new Scanner(System.in);
         int numFields = 0;
         int rows = sc.nextInt();
