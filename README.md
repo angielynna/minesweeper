@@ -17,7 +17,7 @@ cd minesweeper/src/
   
 javac main.java
     
-java main.java < <inputFile.txt
+java main.java < <inputFile.txt>
 ```
 
 - Input can also be passed in through console not as a .txt file
@@ -36,7 +36,7 @@ java main.java
 
 <second row of maze>
 
-etc..
+<etc..>
 ```    
 
 - #### Output:
