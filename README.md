@@ -11,10 +11,25 @@ values for this minefield of bombs.
     - Bounds must be between 1-100
     - There can be only bombs or no bombs
   - Reads in from the console / System.in
+  - Run commands from console:
+    - cd minesweeper/src/ 
+    - javac main.java 
+    - java main.java < <inputFile.txt>
+
+  - Input can also be passed in through console not as a .txt file
+    - Run commands from console:
+    - cd minesweeper/src/
+    - javac main.java
+    - java main.java
+    - \> \<row> \<column>
+    - \> \<first row of maze>
+    - \> \<second row of maze>
+    - \> etc...
 
 - #### Output:
-  - The field number
-  - The minefield with the calculated adjacency values
+  - Format:
+    - The field number
+    - The minefield with the calculated adjacency values 
   - Prints above points to the console / System.out
 
 
