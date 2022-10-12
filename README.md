@@ -18,9 +18,12 @@ values for this minefield of bombs.
 
   - Input can also be passed in through console not as a .txt file
     - Run commands from console:
-    - cd minesweeper/src/
-    - javac main.java
-    - java main.java
+    
+    '<cd minesweeper/src/>'
+  
+    'javac main.java'
+    
+     'java main.java' 
     - \> \<row> \<column>
     - \> \<first row of maze>
     - \> \<second row of maze>
