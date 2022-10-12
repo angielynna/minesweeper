@@ -39,3 +39,7 @@ values for this minefield of bombs.
 - Randomly generates a random number of minefields with a random bounds (between [1-100]).
 - Randomly generates a spawn rate at which bombs are placed and places the bombs accordingly.
 - Outputs as the file generated.txt
+
+#### Future development plans:
+
+- Implement a GUI to run a real time Minesweeper game
