@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Displays minesweeper minefield with all adjacency values and bombs.
  *
  * @author Angelynna Pyeatt
- * @version October 9, 2022
+ * @version October 11, 2022
  */
 class main {
     public static void main(final String[] theArgs) {
