@@ -5,29 +5,39 @@ values for this minefield of bombs.
 ### Minesweeper driver- _main.java_
 
 - WARNING: Project assumes correct input is passed in from the console
-- #### Input:
-  - A text file with minefields, a text file will auto generate when mineFieldGenerator.java is ran
-  - Individual minefield specifics:
-    - Bounds must be between 1-100
-    - There can be only bombs or no bombs
-  - Reads in from the console / System.in
-  - Run commands from console:
-    - cd minesweeper/src/ 
-    - javac main.java 
-    - java main.java < <inputFile.txt>
-
-  - Input can also be passed in through console not as a .txt file
+  - #### Input:
+    - A text file with minefields, a text file will auto generate when mineFieldGenerator.java is ran
+    - Individual minefield specifics:
+      - Bounds must be between 1-100
+      - There can be only bombs or no bombs
+    - Reads in from the console / System.in
     - Run commands from console:
-    
-    '<cd minesweeper/src/>'
+```aidl
+cd minesweeper/src/
   
-    'javac main.java'
+javac main.java
     
-     'java main.java' 
-    - \> \<row> \<column>
-    - \> \<first row of maze>
-    - \> \<second row of maze>
-    - \> etc...
+java main.java < <inputFile.txt
+```
+
+- Input can also be passed in through console not as a .txt file
+      - Run commands from console:
+
+```
+cd minesweeper/src/
+  
+javac main.java
+    
+java main.java 
+      
+<row> <column>
+      
+<first row of maze>
+
+<second row of maze>
+
+etc..
+```    
 
 - #### Output:
   - Format:
