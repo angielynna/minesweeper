@@ -1,4 +1,4 @@
-# Personal minesweeper project
+# Minesweeper
 A program that takes in an input file containing a minefield of bombs and safespaces and calculates the adjacency key 
 values for this minefield of bombs.
 
